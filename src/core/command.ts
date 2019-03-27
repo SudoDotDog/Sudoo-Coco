@@ -10,7 +10,7 @@ import { Panic } from "../panic/panic";
 import { Argument } from "./argument";
 import { Option } from "./option";
 
-export type Executable = (inputs: Record<string, string>) => void;
+export type Executable = (inputs: Record<string, string>) => Promise<void> | void;
 
 export class Command {
 
@@ -49,12 +49,14 @@ export class Command {
         return this;
     }
 
-    public execute(args: string[]): void {
+    public async execute(args: string[]): Promise<void> {
 
         const record: Record<string, string> = this.parseArgs(args);
-        this._listeners.forEach((executable: Executable) => {
-            executable(record);
+        const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable) => {
+            return executable(record);
         });
+
+        await Promise.all(promises);
         return;
     }
 
