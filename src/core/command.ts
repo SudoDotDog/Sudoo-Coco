@@ -86,6 +86,10 @@ export class Command {
             if (isOption(current)) {
                 const option: Option | null = this.findOption(current);
 
+                if (!option) {
+                    throw Panic.code(ERROR_CODE.OPTION_NOT_FOUND, current);
+                }
+
                 if (option.isBoolean) {
                     result[option.name] = "true";
                 } else {
