@@ -1,0 +1,47 @@
+{
+  "name": "@sudoo/coco",
+  "version": "0.0.1",
+  "description": ":ocean: A simple command line tool framework",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudoo/Coco.git"
+  },
+  "keywords": [
+    "bark"
+  ],
+  "author": "WMXPY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sudoo/Coco/issues"
+  },
+  "homepage": "https://github.com/sudoo/Coco#readme",
+  "dependencies": {
+    "@sudoo/bark": "^2.1.0",
+    "connor": "^2.0.0"
+  },
+  "devDependencies": {
+    "@sudoo/mock": "^1.1.0",
+    "@sudoo/triforce": "^1.5.0"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "reporter": [
+      "json",
+      "text-summary"
+    ],
+    "report-dir": "coverage",
+    "require": [
+      "./test/tshook.js"
+    ],
+    "sourceMap": true
+  }
+}
