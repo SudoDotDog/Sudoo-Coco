@@ -9,11 +9,7 @@ mocha := node_modules/.bin/mocha
 
 .IGNORE: clean-linux
 
-main: run
-
-run: 
-	@echo "[INFO] Running through ts-node"
-	@NODE_ENV=development $(ts_node) example/example.ts
+main: build
 
 dev:
 	@echo "[INFO] Building for development"
