@@ -23,7 +23,7 @@
     "connor": "^2.0.0"
   },
   "devDependencies": {
-    "@sudoo/mock": "^1.1.0",
+    "@sudoo/mock": "^1.2.0",
     "@sudoo/triforce": "^1.5.0"
   },
   "nyc": {
