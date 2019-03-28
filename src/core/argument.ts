@@ -27,7 +27,7 @@ export class Argument {
     }
 
     public get description(): string {
-        return this._description;
+        return this._description || '';
     }
 
     public get name(): string {

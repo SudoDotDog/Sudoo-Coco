@@ -58,8 +58,8 @@ export class Coco {
             throw Panic.code(ERROR_CODE.INVALID_ARGV, argv.join(' '));
         }
 
-        const environment: string = args.shift();
-        const executer: string = args.shift();
+        const environment: string = args.shift() as string;
+        const executer: string = args.shift() as string;
 
         this.emit(COCO_EVENT.SYSTEM_CALL_INFO, environment, executer);
 
@@ -70,7 +70,11 @@ export class Coco {
             return;
         }
 
-        const calling: string = args.shift();
+        const calling: string | undefined = args.shift();
+
+        if (!calling) {
+            throw Panic.code(ERROR_CODE.INVALID_ARGV, calling as any);
+        }
 
         for (const command of this._commands) {
             if (command.match(calling)) {
