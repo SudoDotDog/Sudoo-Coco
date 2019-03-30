@@ -3,6 +3,7 @@
         "codecov",
         "connor",
         "sudoo",
+        "triforce",
         "tshook"
     ],
     "tslint.configFile": "typescript/tslint.json",
