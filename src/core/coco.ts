@@ -5,8 +5,7 @@
  */
 
 import { isCallingRoot } from "../command/util";
-import { ERROR_CODE } from "../panic/declare";
-import { Panic } from "../panic/panic";
+import { ERROR_CODE, panic } from "../panic/declare";
 import { Command } from "./command";
 import { COCO_EVENT } from "./declare";
 
@@ -55,7 +54,7 @@ export class Coco {
         const args: string[] = [...argv];
 
         if (args.length < 2) {
-            throw Panic.code(ERROR_CODE.INVALID_ARGV, argv.join(' '));
+            throw panic.code(ERROR_CODE.INVALID_ARGV, argv.join(' '));
         }
 
         const environment: string = args.shift() as string;
@@ -73,7 +72,7 @@ export class Coco {
         const calling: string | undefined = args.shift();
 
         if (!calling) {
-            throw Panic.code(ERROR_CODE.INVALID_ARGV, calling as any);
+            throw panic.code(ERROR_CODE.INVALID_ARGV, calling as any);
         }
 
         for (const command of this._commands) {

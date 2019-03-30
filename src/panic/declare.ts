@@ -4,6 +4,8 @@
  * @description Declare
  */
 
+import { Panic } from "connor";
+
 export const MODULE_NAME = 'COCO';
 
 export enum ERROR_CODE {
@@ -25,3 +27,5 @@ export const ERROR_LIST = {
 
     [ERROR_CODE.OPTION_NOT_FOUND]: 'Option: "{}" not found',
 };
+
+export const panic: Panic<ERROR_CODE> = Panic.withDictionary(MODULE_NAME, ERROR_LIST);

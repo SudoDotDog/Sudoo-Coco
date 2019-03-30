@@ -5,8 +5,7 @@
  */
 
 import { isOption } from "../command/util";
-import { ERROR_CODE } from "../panic/declare";
-import { Panic } from "../panic/panic";
+import { ERROR_CODE, panic } from "../panic/declare";
 import { Argument } from "./argument";
 import { Option } from "./option";
 
@@ -87,7 +86,7 @@ export class Command {
                 const option: Option | null = this.findOption(current);
 
                 if (!option) {
-                    throw Panic.code(ERROR_CODE.OPTION_NOT_FOUND, current);
+                    throw panic.code(ERROR_CODE.OPTION_NOT_FOUND, current);
                 }
 
                 if (option.isBoolean) {
@@ -102,7 +101,7 @@ export class Command {
         }
 
         if (tempArguments.length > this._arguments.length) {
-            throw Panic.code(ERROR_CODE.TOO_MANY_ARGUMENTS);
+            throw panic.code(ERROR_CODE.TOO_MANY_ARGUMENTS);
         }
 
         for (const argument of this._arguments) {
@@ -110,7 +109,7 @@ export class Command {
 
             if (!first) {
                 if (!argument.isOptional) {
-                    throw Panic.code(ERROR_CODE.INSUFFICIENT_ARGUMENTS);
+                    throw panic.code(ERROR_CODE.INSUFFICIENT_ARGUMENTS);
                 }
                 return result;
             }
