@@ -1,4 +1,4 @@
-# Sudoo-Coco
+# Coco
 
 [![Build Status](https://travis-ci.org/SudoDotDog/Coco.svg?branch=master)](https://travis-ci.org/SudoDotDog/Coco)
 [![codecov](https://codecov.io/gh/SudoDotDog/Coco/branch/master/graph/badge.svg)](https://codecov.io/gh/SudoDotDog/Coco)
