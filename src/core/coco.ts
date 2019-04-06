@@ -49,6 +49,30 @@ export class Coco {
         return this;
     }
 
+    public remove<T extends CORE_EVENT>(event: T, remove: CocoEventLister<T>): this {
+
+        if (this._eventListeners.has(event)) {
+
+            const listeners: Array<CocoEventLister<T>> = this._eventListeners.get(event) as Array<CocoEventLister<T>>;
+            const newListeners: Array<CocoEventLister<T>> = [];
+            for (const current of listeners) {
+                if (current !== remove) {
+                    newListeners.push(current);
+                }
+            }
+            this._eventListeners.set(event, newListeners);
+        }
+        return this;
+    }
+
+    public removeAll<T extends CORE_EVENT>(event: T): this {
+
+        if (this._eventListeners.has(event)) {
+            this._eventListeners.set(event, []);
+        }
+        return this;
+    }
+
     public async emit<T extends CORE_EVENT>(event: T, ...args: CocoEventArgs[T]): Promise<void> {
 
         if (this._eventListeners.has(event)) {
