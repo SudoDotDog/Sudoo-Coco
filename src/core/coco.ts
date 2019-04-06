@@ -18,14 +18,14 @@ export class Coco {
     private _rootCommand: Command | null;
     private readonly _commands: Command[];
 
-    private readonly _eventListeners: Map<CORE_EVENT, CocoEventLister<any>>;
+    private readonly _eventListeners: Map<CORE_EVENT, Array<CocoEventLister<any>>>;
 
     private constructor() {
 
         this._rootCommand = null;
         this._commands = [];
 
-        this._eventListeners = new Map<CORE_EVENT, CocoEventLister<any>>();
+        this._eventListeners = new Map<CORE_EVENT, Array<CocoEventLister<any>>>();
     }
 
     public rootCommand(command: Command): this {
@@ -39,15 +39,21 @@ export class Coco {
     }
 
     public on<T extends CORE_EVENT>(event: T, listener: CocoEventLister<T>): this {
-        this._eventListeners.set(event, listener);
+
+        if (this._eventListeners.has(event)) {
+            const listeners: Array<CocoEventLister<T>> = this._eventListeners.get(event) as Array<CocoEventLister<T>>;
+            this._eventListeners.set(event, [...listeners, listener]);
+        } else {
+            this._eventListeners.set(event, [listener]);
+        }
         return this;
     }
 
     public async emit<T extends CORE_EVENT>(event: T, ...args: CocoEventArgs[T]): Promise<void> {
 
         if (this._eventListeners.has(event)) {
-            const listener: CocoEventLister<T> = this._eventListeners.get(event) as CocoEventLister<T>;
-            await listener(...args);
+            const listeners: Array<CocoEventLister<T>> = this._eventListeners.get(event) as Array<CocoEventLister<T>>;
+            await Promise.all(listeners.map((listener: CocoEventLister<T>) => listener(...args)));
         }
         return;
     }
