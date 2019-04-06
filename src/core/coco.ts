@@ -5,9 +5,9 @@
  */
 
 import { isCallingRoot } from "../command/util";
+import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "../event/declare";
 import { ERROR_CODE, panic } from "../panic/declare";
 import { Command } from "./command";
-import { COCO_EVENT } from "./declare";
 
 export class Coco {
 
@@ -18,14 +18,14 @@ export class Coco {
     private _rootCommand: Command | null;
     private readonly _commands: Command[];
 
-    private readonly _eventListeners: Map<COCO_EVENT, (...args: any[]) => void>;
+    private readonly _eventListeners: Map<CORE_EVENT, CocoEventLister<any>>;
 
     private constructor() {
 
         this._rootCommand = null;
         this._commands = [];
 
-        this._eventListeners = new Map<COCO_EVENT, (...args: any[]) => void>();
+        this._eventListeners = new Map<CORE_EVENT, CocoEventLister<any>>();
     }
 
     public rootCommand(command: Command): this {
@@ -38,15 +38,18 @@ export class Coco {
         return this;
     }
 
-    public on(event: COCO_EVENT, listener: () => void) {
+    public on<T extends CORE_EVENT>(event: T, listener: CocoEventLister<T>): this {
         this._eventListeners.set(event, listener);
+        return this;
     }
 
-    public emit(event: COCO_EVENT, ...args: any[]) {
+    public async emit<T extends CORE_EVENT>(event: T, ...args: CocoEventArgs[T]): Promise<void> {
+
         if (this._eventListeners.has(event)) {
-            const listener: (...args: any[]) => void = this._eventListeners.get(event) as (...args: any[]) => void;
-            listener(...args);
+            const listener: CocoEventLister<T> = this._eventListeners.get(event) as CocoEventLister<T>;
+            await listener(...args);
         }
+        return;
     }
 
     public async go(argv: string[]): Promise<void> {
@@ -60,7 +63,7 @@ export class Coco {
         const environment: string = args.shift() as string;
         const executer: string = args.shift() as string;
 
-        this.emit(COCO_EVENT.SYSTEM_CALL_INFO, environment, executer);
+        await this.emit(CORE_EVENT.SYSTEM_CALL_INFO, environment, executer);
 
         if (isCallingRoot(args)) {
             if (this._rootCommand) {
@@ -82,6 +85,7 @@ export class Coco {
             }
         }
 
+        await this.emit(CORE_EVENT.FINISH);
         return;
     }
 }
