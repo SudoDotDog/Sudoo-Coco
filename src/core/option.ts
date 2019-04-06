@@ -37,6 +37,12 @@ export class Option {
         return this._name || this._keys[0];
     }
 
+    public boolean(): this {
+
+        this._isBoolean = true;
+        return this;
+    }
+
     public alias(key: string, ...keys: string[]): this {
 
         this._keys.push(key, ...keys);
