@@ -3,9 +3,9 @@
 
 
 "@sudoo/bark@^2.1.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.3.0.tgz#6ff12367bfe26fd042809aa3d7d5ccd97776e1c6"
-  integrity sha512-ODnh0R8h3UAILnLHBMRDOApUwUXTkE7PaRjtscd+0GyUHbHHuXW3WSu7KueLVpQ2yMxFH/8y3FcbYwfurxLQeA==
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.5.1.tgz#b898c0c302a2ccf8cb881a57f15474569b91cf32"
+  integrity sha512-vVkZtwRFbx5jtZzyZI8ZcdDEWYJN3H1Tb/PwzoxpPIf8KkzNftQL4VW+9tVfrNiw/MHyY92HWQDjKsY4WONQGQ==
 
 "@sudoo/io@^0.1.1":
   version "0.1.1"
