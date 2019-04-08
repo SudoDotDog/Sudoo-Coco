@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/sudoo/Coco#readme",
   "dependencies": {
-    "@sudoo/bark": "^2.1.0",
+    "@sudoo/bark": "^2.5.1",
     "connor": "^2.4.0"
   },
   "devDependencies": {
