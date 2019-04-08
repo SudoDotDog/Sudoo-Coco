@@ -18,6 +18,7 @@ export class Command {
     }
 
     private readonly _command: string;
+    private readonly _alias: string[];
     private readonly _arguments: Argument[];
     private readonly _options: Option[];
 
@@ -25,6 +26,7 @@ export class Command {
 
     private constructor(command: string) {
         this._command = command;
+        this._alias = [];
         this._arguments = [];
         this._options = [];
 
@@ -33,12 +35,21 @@ export class Command {
 
     public match(command: string): boolean {
 
-        return command === this._command;
+        if(command === this._command){
+            return true;
+        }
+        return this._alias.includes(command);
     }
 
     public argument(arg: Argument): this {
 
         this._arguments.push(arg);
+        return this;
+    }
+
+    public alias(alias: string): this {
+
+        this._alias.push(alias);
         return this;
     }
 
