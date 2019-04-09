@@ -35,7 +35,7 @@ export class Command {
 
     public match(command: string): boolean {
 
-        if(command === this._command){
+        if (command === this._command) {
             return true;
         }
         return this._alias.includes(command);
