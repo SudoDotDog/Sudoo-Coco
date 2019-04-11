@@ -8,4 +8,5 @@ export { Argument } from "./core/argument";
 export { Coco } from "./core/coco";
 export { Command } from "./core/command";
 export { Option } from "./core/option";
+export { createInfoCommand, parseInfo } from "./info/info";
 

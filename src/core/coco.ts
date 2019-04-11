@@ -33,9 +33,17 @@ export class Coco {
         return this;
     }
 
+    public getRootCommand(): Command | null {
+        return this._rootCommand;
+    }
+
     public command(command: Command): this {
         this._commands.push(command);
         return this;
+    }
+
+    public getCommands(): Command[] {
+        return this._commands;
     }
 
     public on<T extends CORE_EVENT>(event: T, listener: CocoEventLister<T>): this {
