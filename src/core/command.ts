@@ -43,6 +43,10 @@ export class Command {
         this._listeners = [];
     }
 
+    public get simulate(): string {
+        return this._command.join(' ');
+    }
+
     public match(argv: string[]): boolean {
 
         return this._command.every((value: string, index: number) => {

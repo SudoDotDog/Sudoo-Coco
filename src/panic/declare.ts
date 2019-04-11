@@ -16,6 +16,8 @@ export enum ERROR_CODE {
     INSUFFICIENT_ARGUMENTS = 1251,
 
     OPTION_NOT_FOUND = 1300,
+
+    MULTIPLE_COMMAND_MATCHED = 1401,
 }
 
 export const ERROR_LIST = {
@@ -26,6 +28,8 @@ export const ERROR_LIST = {
     [ERROR_CODE.INSUFFICIENT_ARGUMENTS]: 'Insufficient arguments',
 
     [ERROR_CODE.OPTION_NOT_FOUND]: 'Option: "{}" not found',
+
+    [ERROR_CODE.MULTIPLE_COMMAND_MATCHED]: 'Matched multiple commands: "{}"',
 };
 
 export const panic: Panic<ERROR_CODE> = Panic.withDictionary(MODULE_NAME, ERROR_LIST);

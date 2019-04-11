@@ -110,15 +110,32 @@ export class Coco {
             return;
         }
 
+        const matched: Command[] = this._marchCommand(args);
+
+        if (matched.length > 1) {
+            throw panic.code(ERROR_CODE.MULTIPLE_COMMAND_MATCHED, matched.map((command: Command) => command.simulate).join(', '));
+        }
+
+        if (matched.length === 0) {
+            await this.emit(CORE_EVENT.FAILED);
+            return;
+        }
+
+        await matched[0].execute(args);
+        await this.emit(CORE_EVENT.SUCCEED);
+        return;
+    }
+
+    private _marchCommand(argv: string[]): Command[] {
+
+        const commands: Command[] = [];
+
         for (const command of this._commands) {
-            if (command.match(args)) {
-                await command.execute(args);
-                await this.emit(CORE_EVENT.SUCCEED);
-                return;
+            if (command.match(argv)) {
+                commands.push(command);
             }
         }
 
-        await this.emit(CORE_EVENT.FAILED);
-        return;
+        return commands;
     }
 }

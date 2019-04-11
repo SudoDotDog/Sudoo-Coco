@@ -6,9 +6,11 @@
  */
 
 import { Sandbox } from "@sudoo/mock";
+import { fail } from "assert";
 import { expect } from "chai";
 import * as Chance from "chance";
 import { Coco, Command } from "../../src";
+import { ERROR_CODE } from "../../src/panic/declare";
 import { createBarkMockArgs } from "../mock/argv";
 
 describe('Given -Command- coco scenario', (): void => {
@@ -45,13 +47,12 @@ describe('Given -Command- coco scenario', (): void => {
 
         const argv: string[] = createBarkMockArgs(first, second);
 
-        await coco.go(argv);
-
-        expect(firstStack).to.be.lengthOf(0);
-        expect(secondStack).to.be.lengthOf(1);
-
-        firstStack.reset();
-        secondStack.reset();
+        try {
+            await coco.go(argv);
+            fail();
+        } catch (err) {
+            expect(err.code).to.be.equal(ERROR_CODE.MULTIPLE_COMMAND_MATCHED);
+        }
     });
 
     it('should be able to trigger root command', async (): Promise<void> => {
