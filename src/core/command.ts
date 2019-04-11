@@ -14,42 +14,45 @@ export type Executable = (inputs: Record<string, string>) => Promise<void> | voi
 export class Command {
 
     public static create(command: string): Command {
-        return new Command(command);
+        return new Command([command]);
     }
 
-    private readonly _command: string;
-    private readonly _alias: string[];
+    public static multiple(commands: string[]): Command {
+        return new Command(commands);
+    }
+
+    public static root(): Command {
+        return new Command([]);
+    }
+
+    private readonly _command: string[];
     private readonly _arguments: Argument[];
     private readonly _options: Option[];
 
     private readonly _listeners: Executable[];
 
-    private constructor(command: string) {
+    private constructor(command: string[]) {
         this._command = command;
-        this._alias = [];
         this._arguments = [];
         this._options = [];
 
         this._listeners = [];
     }
 
-    public match(command: string): boolean {
+    public match(argv: string[]): boolean {
 
-        if (command === this._command) {
-            return true;
-        }
-        return this._alias.includes(command);
+        return this._command.every((value: string, index: number) => {
+
+            if (value === argv[index]) {
+                return true;
+            }
+            return false;
+        });
     }
 
     public argument(arg: Argument): this {
 
         this._arguments.push(arg);
-        return this;
-    }
-
-    public alias(alias: string): this {
-
-        this._alias.push(alias);
         return this;
     }
 
@@ -61,7 +64,9 @@ export class Command {
 
     public async execute(args: string[]): Promise<void> {
 
-        const record: Record<string, string> = this.parseArgs(args);
+        const shifted: string[] = args.slice(this._command.length);
+
+        const record: Record<string, string> = this.parseArgs(shifted);
         const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable) => {
             return executable(record);
         });

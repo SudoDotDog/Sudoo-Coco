@@ -110,14 +110,8 @@ export class Coco {
             return;
         }
 
-        const calling: string | undefined = args.shift();
-
-        if (!calling) {
-            throw panic.code(ERROR_CODE.INVALID_ARGV, calling as any);
-        }
-
         for (const command of this._commands) {
-            if (command.match(calling)) {
+            if (command.match(args)) {
                 await command.execute(args);
                 await this.emit(CORE_EVENT.SUCCEED);
                 return;
