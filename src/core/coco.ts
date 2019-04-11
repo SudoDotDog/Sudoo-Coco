@@ -111,11 +111,12 @@ export class Coco {
         for (const command of this._commands) {
             if (command.match(calling)) {
                 await command.execute(args);
+                await this.emit(CORE_EVENT.SUCCEED);
                 return;
             }
         }
 
-        await this.emit(CORE_EVENT.FINISH);
+        await this.emit(CORE_EVENT.FAILED);
         return;
     }
 }
