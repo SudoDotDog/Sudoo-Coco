@@ -17,7 +17,11 @@ export class Command {
         return new Command([command]);
     }
 
-    public static multiple(commands: string[]): Command {
+    public static commands(commands: string[]): Command {
+        return new Command(commands);
+    }
+
+    public static multiple(...commands: string[]): Command {
         return new Command(commands);
     }
 
