@@ -4,10 +4,10 @@
  * @description Coco
  */
 
-import { isCallingRoot } from "../command/util";
-import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "../event/declare";
-import { ERROR_CODE, panic } from "../panic/declare";
-import { Command } from "./command";
+import { Command } from "./command/command";
+import { isCallingRoot } from "./command/util";
+import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "./event/declare";
+import { ERROR_CODE, panic } from "./panic/declare";
 
 export class Coco {
 

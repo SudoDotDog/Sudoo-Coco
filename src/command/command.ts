@@ -4,10 +4,10 @@
  * @description Command
  */
 
-import { isOption } from "../command/util";
+import { Argument } from "../argument/argument";
+import { Option } from "../option/option";
 import { ERROR_CODE, panic } from "../panic/declare";
-import { Argument } from "./argument";
-import { Option } from "./option";
+import { isOption } from "./util";
 
 export type Executable = (inputs: Record<string, string>) => Promise<void> | void;
 

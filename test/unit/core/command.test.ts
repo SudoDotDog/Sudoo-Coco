@@ -7,8 +7,8 @@
 
 import { expect } from "chai";
 import * as Chance from "chance";
-import { Argument } from "../../../src/core/argument";
-import { Command } from "../../../src/core/command";
+import { Argument } from "../../../src/argument/argument";
+import { Command } from "../../../src/command/command";
 import { ERROR_CODE, panic } from "../../../src/panic/declare";
 
 describe('Given {Command} class', (): void => {

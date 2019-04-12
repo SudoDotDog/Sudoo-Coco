@@ -4,9 +4,9 @@
  * @description Index
  */
 
-export { Argument } from "./core/argument";
-export { Coco } from "./core/coco";
-export { Command } from "./core/command";
-export { Option } from "./core/option";
+export { Argument } from "./argument/argument";
+export { Coco } from "./coco";
+export { Command } from "./command/command";
 export { createInfoCommand, parseInfo } from "./info/info";
+export { Option } from "./option/option";
 

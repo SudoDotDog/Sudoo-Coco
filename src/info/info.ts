@@ -4,8 +4,8 @@
  * @description Info
  */
 
-import { Coco } from "../core/coco";
-import { Command } from "../core/command";
+import { Coco } from "../coco";
+import { Command } from "../command/command";
 
 export const createInfoCommand = (
     command: string,
