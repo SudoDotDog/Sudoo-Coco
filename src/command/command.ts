@@ -64,9 +64,9 @@ export class Command {
         });
     }
 
-    public argument(...arg: Argument[]): this {
+    public argument(arg: Argument, ...args: Argument[]): this {
 
-        this._arguments.push(...arg);
+        this._arguments.push(arg, ...args);
         return this;
     }
 
@@ -76,9 +76,9 @@ export class Command {
         return this;
     }
 
-    public option(...option: Option[]): this {
+    public option(option: Option, ...options: Option[]): this {
 
-        this._options.push(...option);
+        this._options.push(option, ...options);
         return this;
     }
 

@@ -39,9 +39,9 @@ export class Coco {
         return this._rootCommand;
     }
 
-    public command(...command: Command[]): this {
+    public command(command: Command, ...commands: Command[]): this {
 
-        this._commands.push(...command);
+        this._commands.push(command, ...commands);
         return this;
     }
 
