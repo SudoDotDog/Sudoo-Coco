@@ -124,7 +124,7 @@ export class Command {
             }
         }
 
-        if (tempArguments.length > this._arguments.length) {
+        if (tempArguments.length > this._getRequiredArguments().length) {
             throw panic.code(ERROR_CODE.TOO_MANY_ARGUMENTS);
         }
 
@@ -140,5 +140,12 @@ export class Command {
             result[argument.name] = first;
         }
         return result;
+    }
+
+    private _getRequiredArguments(): Argument[] {
+
+        return this._arguments.filter((argument: Argument) => {
+            return !argument.isOptional;
+        });
     }
 }
