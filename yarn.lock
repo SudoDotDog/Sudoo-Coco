@@ -8,9 +8,9 @@
   integrity sha512-vVkZtwRFbx5jtZzyZI8ZcdDEWYJN3H1Tb/PwzoxpPIf8KkzNftQL4VW+9tVfrNiw/MHyY92HWQDjKsY4WONQGQ==
 
 "@sudoo/io@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/io/-/io-1.2.0.tgz#f0ed4796f4e09c09f28a5ed0e5bdf38f449e6f0a"
-  integrity sha512-3Wm8xQp4WiaAXDo+XjcvjDJVUQsCRiAfgzzmYpTsl/D64xbZDZyKDYur7cv9DZSe0PG3hJR2YcbM4inaJDjmfA==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/io/-/io-1.2.1.tgz#e3d15030fb20c7c5455638c327f21c41997dd524"
+  integrity sha512-akpNTulr8Wetieni89VbtQ6b6JjiGdaQ48kLsKgdDITr4BFz9j5Adn2gM+ywIC7Lo/4e8oMnr95ffet92VxiiA==
   dependencies:
     "@sudoo/bark" "^2.5.0"
 
