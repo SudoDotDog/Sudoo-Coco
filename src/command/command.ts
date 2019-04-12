@@ -14,18 +14,22 @@ export type Executable = (inputs: Record<string, string>) => Promise<void> | voi
 export class Command {
 
     public static create(command: string): Command {
+
         return new Command([command]);
     }
 
     public static commands(commands: string[]): Command {
+
         return new Command(commands);
     }
 
     public static multiple(...commands: string[]): Command {
+
         return new Command(commands);
     }
 
     public static root(): Command {
+
         return new Command([]);
     }
 
@@ -36,6 +40,7 @@ export class Command {
     private readonly _listeners: Executable[];
 
     private constructor(command: string[]) {
+
         this._command = command;
         this._arguments = [];
         this._options = [];
@@ -44,6 +49,7 @@ export class Command {
     }
 
     public get simulate(): string {
+
         return this._command.join(' ');
     }
 
@@ -58,15 +64,27 @@ export class Command {
         });
     }
 
-    public argument(arg: Argument): this {
+    public argument(...arg: Argument[]): this {
 
-        this._arguments.push(arg);
+        this._arguments.push(...arg);
         return this;
     }
 
-    public option(option: Option): this {
+    public arguments(args: Argument[]): this {
 
-        this._options.push(option);
+        this._arguments.push(...args);
+        return this;
+    }
+
+    public option(...option: Option[]): this {
+
+        this._options.push(...option);
+        return this;
+    }
+
+    public options(options: Option[]): this {
+
+        this._options.push(...options);
         return this;
     }
 

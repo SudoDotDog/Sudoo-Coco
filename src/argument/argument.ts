@@ -23,14 +23,17 @@ export class Argument {
     }
 
     public get isOptional(): boolean {
+
         return this._isOptional;
     }
 
     public get description(): string {
+
         return this._description || '';
     }
 
     public get name(): string {
+
         return this._name;
     }
 

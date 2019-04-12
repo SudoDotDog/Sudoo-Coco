@@ -29,16 +29,25 @@ export class Coco {
     }
 
     public rootCommand(command: Command): this {
+
         this._rootCommand = command;
         return this;
     }
 
     public getRootCommand(): Command | null {
+
         return this._rootCommand;
     }
 
-    public command(command: Command): this {
-        this._commands.push(command);
+    public command(...command: Command[]): this {
+
+        this._commands.push(...command);
+        return this;
+    }
+
+    public commands(commands: Command[]): this {
+
+        this._commands.push(...commands);
         return this;
     }
 
