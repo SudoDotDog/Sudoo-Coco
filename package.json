@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/coco",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": ":ocean: A simple command line tool framework",
   "directories": {
     "doc": "docs"
@@ -23,7 +23,7 @@
     "connor": "^2.4.0"
   },
   "devDependencies": {
-    "@sudoo/io": "^1.2.0",
+    "@sudoo/io": "^1.2.1",
     "@sudoo/mock": "^1.2.0",
     "@sudoo/triforce": "^1.5.0"
   },
