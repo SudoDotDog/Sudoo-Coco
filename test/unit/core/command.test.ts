@@ -38,6 +38,21 @@ describe('Given {Command} class', (): void => {
         });
     });
 
+    it('should be able to parse arguments with optional', (): void => {
+
+        const name: string = chance.string();
+        const command: Command = Command.create(name);
+
+        const arg: string = chance.string();
+        const value: string = chance.string();
+
+        command.argument(Argument.create(arg).optional());
+
+        expect(command.parseArgs([value])).to.be.deep.equal({
+            [arg]: value,
+        });
+    });
+
     it('should be able to parse optional arguments', (): void => {
 
         const name: string = chance.string();
