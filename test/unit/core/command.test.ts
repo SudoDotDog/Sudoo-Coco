@@ -8,7 +8,7 @@
 import { expect } from "chai";
 import * as Chance from "chance";
 import { Argument } from "../../../src/argument/argument";
-import { Command, CommandType } from "../../../src/command/command";
+import { Command } from "../../../src/command/command";
 import { ERROR_CODE, panic } from "../../../src/panic/declare";
 
 describe('Given {Command} class', (): void => {
@@ -18,7 +18,7 @@ describe('Given {Command} class', (): void => {
     it('should be able to create', (): void => {
 
         const name: string = chance.string();
-        const command: CommandType = Command.create(name);
+        const command: Command = Command.create(name);
 
         expect(command).to.be.instanceOf(Command);
     });
@@ -26,7 +26,7 @@ describe('Given {Command} class', (): void => {
     it('should be able to parse arguments', (): void => {
 
         const name: string = chance.string();
-        const command: CommandType = Command.create(name);
+        const command: Command = Command.create(name);
 
         const arg: string = chance.string();
         const value: string = chance.string();
@@ -41,7 +41,7 @@ describe('Given {Command} class', (): void => {
     it('should be able to parse arguments with optional', (): void => {
 
         const name: string = chance.string();
-        const command: CommandType = Command.create(name);
+        const command: Command = Command.create(name);
 
         const arg: string = chance.string();
         const value: string = chance.string();
@@ -56,7 +56,7 @@ describe('Given {Command} class', (): void => {
     it('should be able to parse optional arguments', (): void => {
 
         const name: string = chance.string();
-        const command: CommandType = Command.create(name);
+        const command: Command = Command.create(name);
 
         const arg: string = chance.string();
 
@@ -68,7 +68,7 @@ describe('Given {Command} class', (): void => {
     it('should be able to throw when too many args', (): void => {
 
         const name: string = chance.string();
-        const command: CommandType = Command.create(name);
+        const command: Command = Command.create(name);
 
         const arg: string = chance.string();
         const value: string = chance.string();
@@ -85,7 +85,7 @@ describe('Given {Command} class', (): void => {
     it('should be able to throw when too insufficient args', (): void => {
 
         const name: string = chance.string();
-        const command: CommandType = Command.create(name);
+        const command: Command = Command.create(name);
 
         const arg: string = chance.string();
         const value: string = chance.string();

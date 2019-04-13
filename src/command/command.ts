@@ -9,28 +9,26 @@ import { Option } from "../option/option";
 import { ERROR_CODE, panic } from "../panic/declare";
 import { isOption } from "./util";
 
-export type Executable<T extends Record<string, string>> = (inputs: T) => Promise<void> | void;
+export type Executable = (inputs: Record<string, string>) => Promise<void> | void;
 
-export type CommandType = Command<Record<string, string>>;
+export class Command {
 
-export class Command<T extends Record<string, string>> {
-
-    public static create(command: string): Command<Record<string, string>> {
+    public static create(command: string): Command {
 
         return new Command([command]);
     }
 
-    public static commands(commands: string[]): Command<Record<string, string>> {
+    public static commands(commands: string[]): Command {
 
         return new Command(commands);
     }
 
-    public static multiple(...commands: string[]): Command<Record<string, string>> {
+    public static multiple(...commands: string[]): Command {
 
         return new Command(commands);
     }
 
-    public static root(): Command<Record<string, string>> {
+    public static root(): Command {
 
         return new Command([]);
     }
@@ -39,7 +37,7 @@ export class Command<T extends Record<string, string>> {
     private readonly _arguments: Argument[];
     private readonly _options: Option[];
 
-    private readonly _listeners: Array<Executable<T>>;
+    private readonly _listeners: Executable[];
 
     private constructor(command: string[]) {
 
@@ -94,8 +92,8 @@ export class Command<T extends Record<string, string>> {
 
         const shifted: string[] = args.slice(this._command.length);
 
-        const record: T = this.parseArgs(shifted) as T;
-        const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable<T>) => {
+        const record: Record<string, string> = this.parseArgs(shifted);
+        const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable) => {
             return executable(record);
         });
 
@@ -103,7 +101,7 @@ export class Command<T extends Record<string, string>> {
         return;
     }
 
-    public then(func: Executable<T>): this {
+    public then(func: Executable): this {
 
         this._listeners.push(func);
         return this;

@@ -4,7 +4,7 @@
  * @description Coco
  */
 
-import { CommandType } from "./command/command";
+import { Command } from "./command/command";
 import { isCallingRoot } from "./command/util";
 import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "./event/declare";
 import { ERROR_CODE, panic } from "./panic/declare";
@@ -15,8 +15,8 @@ export class Coco {
         return new Coco();
     }
 
-    private _rootCommand: CommandType | null;
-    private readonly _commands: CommandType[];
+    private _rootCommand: Command | null;
+    private readonly _commands: Command[];
 
     private readonly _eventListeners: Map<CORE_EVENT, Array<CocoEventLister<any>>>;
 
@@ -28,30 +28,30 @@ export class Coco {
         this._eventListeners = new Map<CORE_EVENT, Array<CocoEventLister<any>>>();
     }
 
-    public rootCommand(command: CommandType): this {
+    public rootCommand(command: Command): this {
 
         this._rootCommand = command;
         return this;
     }
 
-    public getRootCommand(): CommandType | null {
+    public getRootCommand(): Command | null {
 
         return this._rootCommand;
     }
 
-    public command(command: CommandType, ...commands: CommandType[]): this {
+    public command(command: Command, ...commands: Command[]): this {
 
         this._commands.push(command, ...commands);
         return this;
     }
 
-    public commands(commands: CommandType[]): this {
+    public commands(commands: Command[]): this {
 
         this._commands.push(...commands);
         return this;
     }
 
-    public getCommands(): CommandType[] {
+    public getCommands(): Command[] {
         return this._commands;
     }
 
@@ -119,10 +119,10 @@ export class Coco {
             return;
         }
 
-        const matched: CommandType[] = this._marchCommand(args);
+        const matched: Command[] = this._marchCommand(args);
 
         if (matched.length > 1) {
-            throw panic.code(ERROR_CODE.MULTIPLE_COMMAND_MATCHED, matched.map((command: CommandType) => command.simulate).join(', '));
+            throw panic.code(ERROR_CODE.MULTIPLE_COMMAND_MATCHED, matched.map((command: Command) => command.simulate).join(', '));
         }
 
         if (matched.length === 0) {
@@ -135,9 +135,9 @@ export class Coco {
         return;
     }
 
-    private _marchCommand(argv: string[]): CommandType[] {
+    private _marchCommand(argv: string[]): Command[] {
 
-        const commands: CommandType[] = [];
+        const commands: Command[] = [];
 
         for (const command of this._commands) {
             if (command.match(argv)) {
