@@ -9,26 +9,28 @@ import { Option } from "../option/option";
 import { ERROR_CODE, panic } from "../panic/declare";
 import { isOption } from "./util";
 
-export type Executable = (inputs: Record<string, string>) => Promise<void> | void;
+export type Executable<T extends Record<string, string>> = (inputs: T) => Promise<void> | void;
 
-export class Command {
+export type CommandType = Command<Record<string, string>>;
 
-    public static create(command: string): Command {
+export class Command<T extends Record<string, string>> {
+
+    public static create(command: string): Command<Record<string, string>> {
 
         return new Command([command]);
     }
 
-    public static commands(commands: string[]): Command {
+    public static commands(commands: string[]): Command<Record<string, string>> {
 
         return new Command(commands);
     }
 
-    public static multiple(...commands: string[]): Command {
+    public static multiple(...commands: string[]): Command<Record<string, string>> {
 
         return new Command(commands);
     }
 
-    public static root(): Command {
+    public static root(): Command<Record<string, string>> {
 
         return new Command([]);
     }
@@ -37,7 +39,7 @@ export class Command {
     private readonly _arguments: Argument[];
     private readonly _options: Option[];
 
-    private readonly _listeners: Executable[];
+    private readonly _listeners: Array<Executable<T>>;
 
     private constructor(command: string[]) {
 
@@ -92,8 +94,8 @@ export class Command {
 
         const shifted: string[] = args.slice(this._command.length);
 
-        const record: Record<string, string> = this.parseArgs(shifted);
-        const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable) => {
+        const record: T = this.parseArgs(shifted) as T;
+        const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable<T>) => {
             return executable(record);
         });
 
@@ -101,7 +103,7 @@ export class Command {
         return;
     }
 
-    public then(func: Executable): this {
+    public then(func: Executable<T>): this {
 
         this._listeners.push(func);
         return this;

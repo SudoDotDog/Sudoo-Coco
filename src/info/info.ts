@@ -5,13 +5,13 @@
  */
 
 import { Coco } from "../coco";
-import { Command } from "../command/command";
+import { Command, CommandType } from "../command/command";
 
 export const createInfoCommand = (
     command: string,
     coco: Coco,
     printFunction: (result: string) => void,
-): Command => {
+): CommandType => {
 
     return Command.create(command).then(() => {
         printFunction(parseInfo(coco));
