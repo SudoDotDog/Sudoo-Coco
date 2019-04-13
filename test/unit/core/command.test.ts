@@ -23,6 +23,21 @@ describe('Given {Command} class', (): void => {
         expect(command).to.be.instanceOf(Command);
     });
 
+
+    it('should be able to create command with type argument', async (): Promise<void> => {
+
+        const name: string = chance.string();
+        const command: Command = Command.create(name).then<{
+            a: string;
+        }>((input: {
+            a: string;
+        }) => {
+            return input as any;
+        });
+
+        expect(command).to.be.instanceOf(Command);
+    });
+
     it('should be able to parse arguments', (): void => {
 
         const name: string = chance.string();

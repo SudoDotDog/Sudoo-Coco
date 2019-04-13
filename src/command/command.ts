@@ -9,7 +9,7 @@ import { Option } from "../option/option";
 import { ERROR_CODE, panic } from "../panic/declare";
 import { isOption } from "./util";
 
-export type Executable = (inputs: Record<string, string>) => Promise<void> | void;
+export type Executable<T = Record<string, string>> = (inputs: T) => Promise<void> | void;
 
 export class Command {
 
@@ -101,9 +101,9 @@ export class Command {
         return;
     }
 
-    public then(func: Executable): this {
+    public then<T extends Record<string, string> = Record<string, string>>(func: Executable<T>): this {
 
-        this._listeners.push(func);
+        (this._listeners as Array<Executable<T>>).push(func);
         return this;
     }
 
