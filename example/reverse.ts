@@ -7,6 +7,6 @@
 import { Reverse } from "../src";
 
 const reverse = Reverse.create();
+reverse.useEnvironmentVariable();
 
-console.log(reverse.isTTY);
-reverse.question('hello').then(console.log);
+reverse.question('hello', 'TEST').then(console.log);
