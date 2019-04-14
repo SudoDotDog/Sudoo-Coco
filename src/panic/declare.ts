@@ -18,6 +18,9 @@ export enum ERROR_CODE {
     OPTION_NOT_FOUND = 1300,
 
     MULTIPLE_COMMAND_MATCHED = 1401,
+
+    NO_ENVIRONMENT_VARIABLE_ASSIGNED = 2004,
+    NO_TARGET_ENVIRONMENT_VARIABLE_FOUND = 2005,
 }
 
 export const ERROR_LIST = {
@@ -30,6 +33,9 @@ export const ERROR_LIST = {
     [ERROR_CODE.OPTION_NOT_FOUND]: 'Option: "{}" not found',
 
     [ERROR_CODE.MULTIPLE_COMMAND_MATCHED]: 'Matched multiple commands: "{}"',
+
+    [ERROR_CODE.NO_ENVIRONMENT_VARIABLE_ASSIGNED]: 'No Env Var assigned',
+    [ERROR_CODE.NO_TARGET_ENVIRONMENT_VARIABLE_FOUND]: 'No target: "{}" Env Var found',
 };
 
 export const panic: Panic<ERROR_CODE> = Panic.withDictionary(MODULE_NAME, ERROR_LIST);
