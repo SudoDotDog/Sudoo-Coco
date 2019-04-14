@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Core
+ * @namespace Command
  * @description Command
  * @override
  */
@@ -13,7 +13,7 @@ import { ERROR_CODE, panic } from "../../../src/panic/declare";
 
 describe('Given {Command} class', (): void => {
 
-    const chance: Chance.Chance = new Chance('core-command');
+    const chance: Chance.Chance = new Chance('command-command');
 
     it('should be able to create', (): void => {
 
