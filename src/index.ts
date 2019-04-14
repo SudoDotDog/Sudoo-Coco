@@ -5,8 +5,9 @@
  */
 
 export { Argument } from "./argument/argument";
-export { Coco } from "./core/coco";
 export { Command } from "./command/command";
+export { Coco } from "./core/coco";
+export { Reverse } from "./core/reverse";
 export { createInfoCommand, parseInfo } from "./info/info";
 export { Option } from "./option/option";
 
