@@ -8,11 +8,12 @@
   integrity sha512-vVkZtwRFbx5jtZzyZI8ZcdDEWYJN3H1Tb/PwzoxpPIf8KkzNftQL4VW+9tVfrNiw/MHyY92HWQDjKsY4WONQGQ==
 
 "@sudoo/io@^1.2.1":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/io/-/io-1.4.0.tgz#062d90a55a545f195c8a0d06b6633c498533c267"
-  integrity sha512-t1HBkoE7bbCrK3/j0GgQtHxo0cfO4QuHdOiEudg5j4lYwBuvGZCisooEOms6d2wlr/+Yg2hTQOkHYnLWMKiCdA==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/io/-/io-1.5.0.tgz#1448a59f4402dcaa5624f241fff5081baa7014b1"
+  integrity sha512-TjKA4gTLv5gL7Ayek9MLRC32giQRbo0diGvgzOO+17CdgYwxMDUAqzyqRuKDUjQN5Day20hO4CUWsJgoAr+QiQ==
   dependencies:
     "@sudoo/bark" "^2.5.1"
+    connor "^2.4.0"
 
 "@sudoo/mock@^1.2.0":
   version "1.2.0"
