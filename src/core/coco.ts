@@ -7,7 +7,9 @@
 import { Command } from "../command/command";
 import { isCallingRoot } from "../command/util";
 import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "../event/declare";
+import { Option } from "../option/option";
 import { ERROR_CODE, panic } from "../panic/declare";
+import { _Array } from "@sudoo/bark/array";
 
 export class Coco {
 
@@ -17,6 +19,7 @@ export class Coco {
 
     private _rootCommand: Command | null;
     private readonly _commands: Command[];
+    private readonly _options: Option[];
 
     private readonly _eventListeners: Map<CORE_EVENT, Array<CocoEventLister<any>>>;
 
@@ -24,6 +27,7 @@ export class Coco {
 
         this._rootCommand = null;
         this._commands = [];
+        this._options = [];
 
         this._eventListeners = new Map<CORE_EVENT, Array<CocoEventLister<any>>>();
     }
@@ -48,6 +52,11 @@ export class Coco {
     public commands(commands: Command[]): this {
 
         this._commands.push(...commands);
+        return this;
+    }
+
+    public globalOption(option: Option): this {
+        this._options.push(option);
         return this;
     }
 
@@ -114,7 +123,7 @@ export class Coco {
 
         if (isCallingRoot(args)) {
             if (this._rootCommand) {
-                this._rootCommand.execute(args);
+                this._rootCommand.execute(args, this._options);
             }
             return;
         }
@@ -130,7 +139,9 @@ export class Coco {
             return;
         }
 
-        await matched[0].execute(args);
+        const firstMatched: Command = _Array.car(matched) as Command;
+
+        await firstMatched.execute(args, this._options);
         await this.emit(CORE_EVENT.SUCCEED);
         return;
     }

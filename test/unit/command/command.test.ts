@@ -48,7 +48,7 @@ describe('Given {Command} class', (): void => {
 
         command.argument(Argument.create(arg));
 
-        expect(command.parseArgs([value])).to.be.deep.equal({
+        expect(command.parseArgs([value], [])).to.be.deep.equal({
             [arg]: value,
         });
     });
@@ -63,7 +63,7 @@ describe('Given {Command} class', (): void => {
 
         command.argument(Argument.create(arg).optional());
 
-        expect(command.parseArgs([value])).to.be.deep.equal({
+        expect(command.parseArgs([value], [])).to.be.deep.equal({
             [arg]: value,
         });
     });
@@ -77,7 +77,7 @@ describe('Given {Command} class', (): void => {
 
         command.argument(Argument.create(arg).optional());
 
-        expect(command.parseArgs([])).to.be.deep.equal({});
+        expect(command.parseArgs([], [])).to.be.deep.equal({});
     });
 
     it('should be able to throw when too many args', (): void => {
@@ -91,7 +91,7 @@ describe('Given {Command} class', (): void => {
         command.argument(Argument.create(arg));
 
         const run = () => {
-            command.parseArgs([value, chance.string()]);
+            command.parseArgs([value, chance.string()], []);
         };
 
         expect(run).to.be.throw(panic.code(ERROR_CODE.TOO_MANY_ARGUMENTS).message);
@@ -108,7 +108,7 @@ describe('Given {Command} class', (): void => {
         command.argument(Argument.create(arg));
 
         const run = () => {
-            command.parseArgs([]);
+            command.parseArgs([], []);
         };
 
         expect(run).to.be.throw(panic.code(ERROR_CODE.INSUFFICIENT_ARGUMENTS).message);

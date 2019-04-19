@@ -88,11 +88,11 @@ export class Command {
         return this;
     }
 
-    public async execute(args: string[]): Promise<void> {
+    public async execute(args: string[], globalOptions: Option[]): Promise<void> {
 
         const shifted: string[] = args.slice(this._command.length);
 
-        const record: Record<string, string> = this.parseArgs(shifted);
+        const record: Record<string, string> = this.parseArgs(shifted, globalOptions);
         const promises: Array<void | Promise<void>> = this._listeners.map((executable: Executable) => {
             return executable(record);
         });
@@ -107,9 +107,9 @@ export class Command {
         return this;
     }
 
-    public findOption(key: string): Option | null {
+    public findOption(key: string, globalOptions: Option[]): Option | null {
 
-        for (const option of this._options) {
+        for (const option of this._options.concat(globalOptions)) {
             if (option.match(key)) {
                 return option;
             }
@@ -117,7 +117,7 @@ export class Command {
         return null;
     }
 
-    public parseArgs(args: string[]): Record<string, string> {
+    public parseArgs(args: string[], globalOptions: Option[]): Record<string, string> {
 
         const result: Record<string, string> = {};
         const tempArguments: string[] = [];
@@ -125,7 +125,7 @@ export class Command {
         for (let pointer = 0; pointer < args.length; pointer++) {
             const current: string = args[pointer];
             if (isOption(current)) {
-                const option: Option | null = this.findOption(current);
+                const option: Option | null = this.findOption(current, globalOptions);
 
                 if (!option) {
                     throw panic.code(ERROR_CODE.OPTION_NOT_FOUND, current);
