@@ -4,12 +4,12 @@
  * @description Coco
  */
 
+import { _Array } from "@sudoo/bark/array";
 import { Command } from "../command/command";
 import { isCallingRoot } from "../command/util";
 import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "../event/declare";
 import { Option } from "../option/option";
 import { ERROR_CODE, panic } from "../panic/declare";
-import { _Array } from "@sudoo/bark/array";
 
 export class Coco {
 
