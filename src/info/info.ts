@@ -20,5 +20,8 @@ export const createInfoCommand = (
 
 export const parseInfo = (instance: Coco): string => {
 
-    return instance.getCommands().toString();
+    return instance.getCommands().map((command: Command) => {
+
+        return command.arguments.length;
+    }).join('\n');
 };
