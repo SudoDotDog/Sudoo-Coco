@@ -22,6 +22,6 @@ export const parseInfo = (instance: Coco): string => {
 
     return instance.getCommands().map((command: Command) => {
 
-        return command.arguments.length;
+        return command.simulate;
     }).join('\n');
 };

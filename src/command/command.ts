@@ -48,8 +48,11 @@ export class Command {
         this._listeners = [];
     }
 
-    public get simulate(): string {
+    public get commands(): string[] {
+        return this._command;
+    }
 
+    public get simulate(): string {
         return this._command.join(' ');
     }
 

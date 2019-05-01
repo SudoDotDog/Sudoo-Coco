@@ -1,6 +1,6 @@
 {
   "name": "@sudoo/coco",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": ":ocean: A simple command line tool framework",
   "directories": {
     "doc": "docs"
