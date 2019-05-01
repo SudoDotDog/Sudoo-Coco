@@ -16,6 +16,8 @@ export enum ERROR_CODE {
     INSUFFICIENT_ARGUMENTS = 1251,
 
     OPTION_NOT_FOUND = 1300,
+    DUPLICATED_OPTION = 1301,
+    REQUIRED_OPTION_INSUFFICIENT = 1302,
 
     MULTIPLE_COMMAND_MATCHED = 1401,
 
@@ -31,6 +33,8 @@ export const ERROR_LIST = {
     [ERROR_CODE.INSUFFICIENT_ARGUMENTS]: 'Insufficient arguments',
 
     [ERROR_CODE.OPTION_NOT_FOUND]: 'Option: "{}" not found',
+    [ERROR_CODE.DUPLICATED_OPTION]: 'Duplicated Option: "{}"',
+    [ERROR_CODE.REQUIRED_OPTION_INSUFFICIENT]: 'Required option insufficient',
 
     [ERROR_CODE.MULTIPLE_COMMAND_MATCHED]: 'Matched multiple commands: "{}"',
 

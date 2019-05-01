@@ -6,27 +6,41 @@
 
 export class Option {
 
-    public static create(key: string): Option {
-        return new Option(key);
+    public static create(...keys: string[]): Option {
+        return new Option(...keys);
     }
 
     private _name: string | null;
     private _description: string | null;
     private _isBoolean: boolean;
+    private _isOptional: boolean;
 
     private readonly _keys: string[];
 
-    private constructor(key: string) {
+    private constructor(...keys: string[]) {
 
         this._name = null;
         this._description = null;
         this._isBoolean = false;
+        this._isOptional = true;
 
-        this._keys = [key];
+        this._keys = keys;
     }
 
     public get isBoolean(): boolean {
         return this._isBoolean;
+    }
+
+    public get isValue(): boolean {
+        return !this._isBoolean;
+    }
+
+    public get isOptional(): boolean {
+        return this._isOptional;
+    }
+
+    public get isRequired(): boolean {
+        return !this._isOptional;
     }
 
     public get description(): string {
@@ -40,6 +54,18 @@ export class Option {
     public boolean(): this {
 
         this._isBoolean = true;
+        return this;
+    }
+
+    public optional(): this {
+
+        this._isOptional = true;
+        return this;
+    }
+
+    public required(): this {
+
+        this._isOptional = false;
         return this;
     }
 

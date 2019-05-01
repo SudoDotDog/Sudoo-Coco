@@ -122,6 +122,8 @@ export class Command {
         const result: Record<string, string> = {};
         const tempArguments: string[] = [];
 
+        const matchOptionSet: Set<Option> = new Set<Option>();
+
         for (let pointer = 0; pointer < args.length; pointer++) {
             const current: string = args[pointer];
             if (isOption(current)) {
@@ -131,12 +133,18 @@ export class Command {
                     throw panic.code(ERROR_CODE.OPTION_NOT_FOUND, current);
                 }
 
+                if (matchOptionSet.has(option)) {
+                    throw panic.code(ERROR_CODE.DUPLICATED_OPTION, current);
+                }
+
                 if (option.isBoolean) {
                     result[option.name] = "true";
                 } else {
                     const next: string = args[++pointer];
                     result[option.name] = next;
                 }
+
+                matchOptionSet.add(option);
             } else {
                 tempArguments.push(current);
             }
@@ -156,6 +164,14 @@ export class Command {
                 return result;
             }
             result[argument.name] = first;
+        }
+
+        const optionRequirementsMat: boolean = [...this._options, ...globalOptions]
+            .filter((option: Option) => option.isRequired)
+            .every((option: Option) => matchOptionSet.has(option));
+
+        if (!optionRequirementsMat) {
+            throw panic.code(ERROR_CODE.REQUIRED_OPTION_INSUFFICIENT);
         }
         return result;
     }
