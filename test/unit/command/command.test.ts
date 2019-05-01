@@ -166,7 +166,6 @@ describe('Given {Command} class', (): void => {
         const command: Command = Command.create(name);
 
         const arg: string = chance.string();
-        const value: string = chance.string();
 
         command.argument(Argument.create(arg));
 
@@ -175,5 +174,39 @@ describe('Given {Command} class', (): void => {
         };
 
         expect(run).to.be.throw(panic.code(ERROR_CODE.INSUFFICIENT_ARGUMENTS).message);
+    });
+
+    it('should be able to parse required options', (): void => {
+
+        const command: Command = Command.create(chance.string());
+
+        const name: string = chance.string();
+        const key: string = chance.string();
+        const arg: string = chance.string();
+
+        command.option(Option.create(key).required().setName(name));
+
+        expect(command.parseArgs([`-${key}`, arg], [])).to.be.deep.equal({
+            [name]: arg,
+        });
+    });
+
+    it('should be able to throw when required options not mat', (): void => {
+
+        const command: Command = Command.create(chance.string());
+
+        const name: string = chance.string();
+        const key: string = chance.string();
+        const arg: string = chance.string();
+
+        command.option(Option.create(key).required().setName(name));
+
+        command.option(Option.create(key).required());
+
+        const run = () => {
+            command.parseArgs([], []);
+        };
+
+        expect(run).to.be.throw(panic.code(ERROR_CODE.REQUIRED_OPTION_INSUFFICIENT).message);
     });
 });
