@@ -19,13 +19,13 @@
   },
   "homepage": "https://github.com/sudoo/Coco#readme",
   "dependencies": {
-    "@sudoo/bark": "^2.6.1",
-    "connor": "^2.4.0"
+    "@sudoo/bark": "^2.7.1",
+    "connor": "^2.6.0"
   },
   "devDependencies": {
-    "@sudoo/io": "^1.6.0",
+    "@sudoo/io": "^1.6.1",
     "@sudoo/mock": "^1.2.0",
-    "@sudoo/triforce": "^1.6.0"
+    "@sudoo/triforce": "^1.8.3"
   },
   "nyc": {
     "extension": [
