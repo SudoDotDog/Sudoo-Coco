@@ -4,7 +4,6 @@
  * @description Coco
  */
 
-import { _Array } from "@sudoo/bark/array";
 import { Command } from "../command/command";
 import { isCallingRoot } from "../command/util";
 import { CocoEventArgs, CocoEventLister, CORE_EVENT } from "../event/declare";
@@ -139,7 +138,7 @@ export class Coco {
             return;
         }
 
-        const firstMatched: Command = _Array.car(matched) as Command;
+        const firstMatched: Command = matched[0] as Command;
 
         await firstMatched.execute(args, this._options);
         await this.emit(CORE_EVENT.SUCCEED);
