@@ -24,7 +24,7 @@
   "devDependencies": {
     "@sudoo/io": "^1.6.1",
     "@sudoo/mock": "^1.2.0",
-    "@sudoo/triforce": "^2.0.3"
+    "@sudoo/triforce": "^2.0.4"
   },
   "nyc": {
     "extension": [
