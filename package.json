@@ -39,9 +39,6 @@
       "text-summary"
     ],
     "report-dir": "coverage",
-    "require": [
-      "./test/tshook.js"
-    ],
     "sourceMap": true
   }
 }
