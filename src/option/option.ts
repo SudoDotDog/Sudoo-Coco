@@ -51,6 +51,7 @@ export class Option {
         return this._name || this._keys[0];
     }
 
+    // eslint-disable-next-line id-blacklist
     public boolean(): this {
 
         this._isBoolean = true;

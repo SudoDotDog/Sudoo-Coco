@@ -25,6 +25,7 @@ describe('Given {Command} class', (): void => {
     });
 
 
+    // eslint-disable-next-line @typescript-eslint/require-await
     it('should be able to create command with type argument', async (): Promise<void> => {
 
         const name: string = chance.string();
@@ -197,7 +198,6 @@ describe('Given {Command} class', (): void => {
 
         const name: string = chance.string();
         const key: string = chance.string();
-        const arg: string = chance.string();
 
         command.option(Option.create(key).required().setName(name));
 

@@ -138,7 +138,7 @@ export class Coco {
             return;
         }
 
-        const firstMatched: Command = matched[0] as Command;
+        const firstMatched: Command = matched[0];
 
         await firstMatched.execute(args, this._options);
         await this.emit(CORE_EVENT.SUCCEED);
