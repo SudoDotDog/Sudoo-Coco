@@ -14,3 +14,7 @@ yarn add @sudoo/coco
 # Or
 npm install @sudoo/coco
 ```
+
+## Examples
+
+See example folder for `coco` examples.
