@@ -6,3 +6,11 @@
 [![downloads](https://img.shields.io/npm/dm/@sudoo/coco.svg)](https://www.npmjs.com/package/@sudoo/coco)
 
 :ocean: A simple command line tool framework
+
+## Install
+
+```sh
+yarn add @sudoo/coco
+# Or
+npm install @sudoo/coco
+```
