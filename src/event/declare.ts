@@ -13,9 +13,9 @@ export enum CORE_EVENT {
 
 export type CocoEventArgs = {
 
-    [CORE_EVENT.SUCCEED]: [],
-    [CORE_EVENT.FAILED]: [],
-    [CORE_EVENT.SYSTEM_CALL_INFO]: [string, string],
+    [CORE_EVENT.SUCCEED]: [];
+    [CORE_EVENT.FAILED]: [];
+    [CORE_EVENT.SYSTEM_CALL_INFO]: [string, string];
 };
 
 export type CocoEventLister<T extends CORE_EVENT> = (...args: CocoEventArgs[T]) => void | Promise<void>;
