@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/%40sudoo%2Fcoco.svg)](https://www.npmjs.com/package/@sudoo/coco)
 [![downloads](https://img.shields.io/npm/dm/@sudoo/coco.svg)](https://www.npmjs.com/package/@sudoo/coco)
 
-:ocean: A simple command line tool framework
+A simple command line tool framework
 
 ## Install
 
